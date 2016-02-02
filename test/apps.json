@@ -1,0 +1,321 @@
+{
+  "apps": [
+    {
+      "id": "/kafka",
+      "cmd": "jre/bin/java -Xmx256m -jar kafka-mesos*.jar scheduler --master=zk://master.mesos:2181/mesos --zk=master.mesos:2181 --api=http://$HOST:$PORT0 --storage=\"zk:/kafka-mesos\" --jre=jre-7u79-openjdk.tgz  --framework-name=\"kafka\" --framework-role=\"*\"   --log=scheduler.log ",
+      "args": null,
+      "user": null,
+      "env": {},
+      "instances": 1,
+      "cpus": 0.5,
+      "mem": 307,
+      "disk": 0,
+      "executor": "",
+      "constraints": [],
+      "uris": [
+        "https://d1vubr0evspla.cloudfront.net/jre-7u79-openjdk.tgz",
+        "https://d1vubr0evspla.cloudfront.net/kafka_2.10-0.8.2.1.tgz",
+        "https://d1vubr0evspla.cloudfront.net/kafka-mesos-0.9.2.0.jar"
+      ],
+      "storeUrls": [],
+      "ports": [
+        10000
+      ],
+      "requirePorts": false,
+      "backoffSeconds": 1,
+      "backoffFactor": 1.15,
+      "maxLaunchDelaySeconds": 3600,
+      "container": null,
+      "healthChecks": [
+        {
+          "path": "/health",
+          "protocol": "HTTP",
+          "portIndex": 0,
+          "gracePeriodSeconds": 120,
+          "intervalSeconds": 60,
+          "timeoutSeconds": 30,
+          "maxConsecutiveFailures": 3,
+          "ignoreHttp1xx": false
+        },
+        {
+          "path": "/api/broker/list",
+          "protocol": "HTTP",
+          "portIndex": 0,
+          "gracePeriodSeconds": 120,
+          "intervalSeconds": 60,
+          "timeoutSeconds": 30,
+          "maxConsecutiveFailures": 0,
+          "ignoreHttp1xx": false
+        }
+      ],
+      "dependencies": [],
+      "upgradeStrategy": {
+        "minimumHealthCapacity": 1,
+        "maximumOverCapacity": 1
+      },
+      "labels": {
+        "DCOS_PACKAGE_RELEASE": "1",
+        "DCOS_PACKAGE_SOURCE": "https://github.com/mesosphere/universe/archive/version-1.x.zip",
+        "DCOS_PACKAGE_COMMAND": "eyJwaXAiOiBbImh0dHBzOi8vZDF2dWJyMGV2c3BsYS5jbG91ZGZyb250Lm5ldC9kY29zLWthZmthLTAuMi4wLnRhci5neiJdfQ==",
+        "DCOS_PACKAGE_METADATA": "eyJkZXNjcmlwdGlvbiI6ICJBcGFjaGUgS2Fma2EgcnVubmluZyBvbiB0b3Agb2YgQXBhY2hlIE1lc29zIiwgImZyYW1ld29yayI6IHRydWUsICJpbWFnZXMiOiB7Imljb24tbGFyZ2UiOiAiaHR0cHM6Ly9kMXZ1YnIwZXZzcGxhLmNsb3VkZnJvbnQubmV0L2ltZy9pY29uLWxhcmdlLnBuZyIsICJpY29uLW1lZGl1bSI6ICJodHRwczovL2QxdnVicjBldnNwbGEuY2xvdWRmcm9udC5uZXQvaW1nL2ljb24tbWVkaXVtLnBuZyIsICJpY29uLXNtYWxsIjogImh0dHBzOi8vZDF2dWJyMGV2c3BsYS5jbG91ZGZyb250Lm5ldC9pbWcvaWNvbi1zbWFsbC5wbmciLCAic2NyZWVuc2hvdHMiOiBbImh0dHBzOi8vZDF2dWJyMGV2c3BsYS5jbG91ZGZyb250Lm5ldC9pbWcvc2NyZWVuLTAta2Fma2EucG5nIl19LCAibGljZW5zZXMiOiBbeyJuYW1lIjogIkFwYWNoZSBMaWNlbnNlIFZlcnNpb24gMi4wIiwgInVybCI6ICJodHRwczovL2dpdGh1Yi5jb20vbWVzb3Mva2Fma2EvYmxvYi9tYXN0ZXIvTElDRU5TRSJ9LCB7Im5hbWUiOiAiQXBhY2hlIExpY2Vuc2UgVmVyc2lvbiAyLjAiLCAidXJsIjogImh0dHBzOi8vZ2l0aHViLmNvbS9tZXNvc3BoZXJlL2Rjb3Mta2Fma2EvYmxvYi9tYXN0ZXIvTElDRU5TRSJ9XSwgIm1haW50YWluZXIiOiAic3VwcG9ydEBtZXNvc3BoZXJlLmlvIiwgIm5hbWUiOiAia2Fma2EiLCAicG9zdEluc3RhbGxOb3RlcyI6ICJUaGUgQXBhY2hlIEthZmthIERDT1MgU2VydmljZSBpcyBpbnN0YWxsZWQ6XG4gIGRvY3MgICAtIGh0dHBzOi8vZ2l0aHViLmNvbS9tZXNvcy9rYWZrYVxuICBpc3N1ZXMgLSBodHRwczovL2dpdGh1Yi5jb20vbWVzb3Mva2Fma2EvaXNzdWVzIiwgInBvc3RVbmluc3RhbGxOb3RlcyI6ICJUaGUgQXBhY2hlIEthZmthIERDT1MgU2VydmljZSBoYXMgYmVlbiB1bmluc3RhbGxlZCBhbmQgd2lsbCBubyBsb25nZXIgcnVuLlxuUGxlYXNlIGZvbGxvdyB0aGUgaW5zdHJ1Y3Rpb25zIGF0IGh0dHA6Ly9kb2NzLm1lc29zcGhlcmUuY29tL3NlcnZpY2VzL2thZmthLyN1bmluc3RhbGwgdG8gY2xlYW4gdXAgYW55IHBlcnNpc3RlZCBzdGF0ZSIsICJwcmVJbnN0YWxsTm90ZXMiOiAiVGhpcyB3aWxsIGluc3RhbGwgQXBhY2hlIEthZmthIERDT1MgU2VydmljZS4iLCAic2NtIjogImh0dHBzOi8vZ2l0aHViLmNvbS9tZXNvcy9rYWZrYSIsICJ0YWdzIjogWyJtZXNzYWdlIiwgImJyb2tlciIsICJtZXNzYWdpbmciXSwgInZlcnNpb24iOiAiMC45LjIuMCJ9",
+        "DCOS_PACKAGE_REGISTRY_VERSION": "1.0.0-rc1",
+        "DCOS_PACKAGE_FRAMEWORK_NAME": "kafka",
+        "DCOS_PACKAGE_VERSION": "0.9.2.0",
+        "DCOS_PACKAGE_NAME": "kafka",
+        "DCOS_PACKAGE_IS_FRAMEWORK": "true"
+      },
+      "acceptedResourceRoles": null,
+      "version": "2016-01-29T18:43:27.357Z",
+      "versionInfo": {
+        "lastScalingAt": "2016-01-29T18:43:27.357Z",
+        "lastConfigChangeAt": "2016-01-29T18:43:27.357Z"
+      },
+      "tasksStaged": 0,
+      "tasksRunning": 1,
+      "tasksHealthy": 1,
+      "tasksUnhealthy": 0,
+      "deployments": []
+    },
+    {
+      "id": "/spark",
+      "cmd": "mv ./conf/log4j-dispatcher.properties ./conf/log4j.properties && ./bin/spark-class org.apache.spark.deploy.mesos.MesosClusterDispatcher --port $PORT0 --webui-port $PORT1 --master mesos://zk://master.mesos:2181/mesos --zk master.mesos:2181 --host $HOST --name spark",
+      "args": null,
+      "user": null,
+      "env": {
+        "SPARK_USER": "root",
+        "APPLICATION_WEB_PROXY_BASE": "/service/spark"
+      },
+      "instances": 1,
+      "cpus": 8,
+      "mem": 8192,
+      "disk": 0,
+      "executor": "",
+      "constraints": [],
+      "uris": [],
+      "storeUrls": [],
+      "ports": [
+        10002,
+        10003
+      ],
+      "requirePorts": false,
+      "backoffSeconds": 1,
+      "backoffFactor": 1.15,
+      "maxLaunchDelaySeconds": 3600,
+      "container": {
+        "type": "DOCKER",
+        "volumes": [],
+        "docker": {
+          "image": "mesosphere/spark:1.6.0",
+          "network": "HOST",
+          "privileged": false,
+          "parameters": [],
+          "forcePullImage": false
+        }
+      },
+      "healthChecks": [
+        {
+          "path": "/",
+          "protocol": "HTTP",
+          "portIndex": 1,
+          "gracePeriodSeconds": 5,
+          "intervalSeconds": 60,
+          "timeoutSeconds": 10,
+          "maxConsecutiveFailures": 3,
+          "ignoreHttp1xx": false
+        }
+      ],
+      "dependencies": [],
+      "upgradeStrategy": {
+        "minimumHealthCapacity": 1,
+        "maximumOverCapacity": 1
+      },
+      "labels": {
+        "DCOS_PACKAGE_RELEASE": "5",
+        "DCOS_PACKAGE_SOURCE": "https://github.com/mesosphere/universe/archive/version-1.x.zip",
+        "DCOS_PACKAGE_COMMAND": "eyJwaXAiOiBbImh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuY29tL3NwYXJrL2Fzc2V0cy9kY29zX3NwYXJrLTAuNS4wLXB5Mi5weTMtbm9uZS1hbnkud2hsIl19",
+        "DCOS_PACKAGE_METADATA": "eyJkZXNjcmlwdGlvbiI6ICJTcGFyayBpcyBhIGZhc3QgYW5kIGdlbmVyYWwgY2x1c3RlciBjb21wdXRpbmcgc3lzdGVtIGZvciBCaWcgRGF0YSIsICJmcmFtZXdvcmsiOiB0cnVlLCAiaW1hZ2VzIjogeyJpY29uLWxhcmdlIjogImh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuY29tL3NwYXJrL2Fzc2V0cy9pY29uLXNlcnZpY2Utc3BhcmstbGFyZ2UucG5nIiwgImljb24tbWVkaXVtIjogImh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuY29tL3NwYXJrL2Fzc2V0cy9pY29uLXNlcnZpY2Utc3BhcmstbWVkaXVtLnBuZyIsICJpY29uLXNtYWxsIjogImh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuY29tL3NwYXJrL2Fzc2V0cy9pY29uLXNlcnZpY2Utc3Bhcmstc21hbGwucG5nIn0sICJsaWNlbnNlcyI6IFt7Im5hbWUiOiAiQXBhY2hlIExpY2Vuc2UgVmVyc2lvbiAyLjAiLCAidXJsIjogImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9hcGFjaGUvc3BhcmsvbWFzdGVyL0xJQ0VOU0UifV0sICJtYWludGFpbmVyIjogInN1cHBvcnRAbWVzb3NwaGVyZS5pbyIsICJuYW1lIjogInNwYXJrIiwgInBvc3RJbnN0YWxsTm90ZXMiOiAiVGhlIEFwYWNoZSBTcGFyayBEQ09TIFNlcnZpY2UgaGFzIGJlZW4gc3VjY2Vzc2Z1bGx5IGluc3RhbGxlZCFcblxuXHREb2N1bWVudGF0aW9uOiBodHRwczovL3NwYXJrLmFwYWNoZS5vcmcvZG9jcy9sYXRlc3QvcnVubmluZy1vbi1tZXNvcy5odG1sXG5cdElzc3VlczogaHR0cHM6Ly9pc3N1ZXMuYXBhY2hlLm9yZy9qaXJhL2Jyb3dzZS9TUEFSSyIsICJwb3N0VW5pbnN0YWxsTm90ZXMiOiAiVGhlIEFwYWNoZSBTcGFyayBEQ09TIFNlcnZpY2UgaGFzIGJlZW4gdW5pbnN0YWxsZWQgYW5kIHdpbGwgbm8gbG9uZ2VyIHJ1bi5cblBsZWFzZSBmb2xsb3cgdGhlIGluc3RydWN0aW9ucyBhdCBodHRwOi8vZG9jcy5tZXNvc3BoZXJlLmNvbS9zZXJ2aWNlcy9zcGFyay8jdW5pbnN0YWxsIHRvIGNsZWFuIHVwIGFueSBwZXJzaXN0ZWQgc3RhdGUuIiwgInByZUluc3RhbGxOb3RlcyI6ICJOb3RlIHRoYXQgdGhlIEFwYWNoZSBTcGFyayBEQ09TIFNlcnZpY2UgaXMgYmV0YSBhbmQgdGhlcmUgbWF5IGJlIGJ1Z3MsIGluY29tcGxldGUgZmVhdHVyZXMsIGluY29ycmVjdCBkb2N1bWVudGF0aW9uIG9yIG90aGVyIGRpc2NyZXBhbmNpZXMuXG5XZSByZWNvbW1lbmQgYSBtaW5pbXVtIG9mIHR3byBub2RlcyB3aXRoIGF0IGxlYXN0IDIgQ1BVIGFuZCAyR0Igb2YgUkFNIGF2YWlsYWJsZSBmb3IgdGhlIFNwYXJrIFNlcnZpY2UgYW5kIHJ1bm5pbmcgYSBTcGFyayBqb2IuXG5Ob3RlOiBUaGUgU3BhcmsgQ0xJIG1heSB0YWtlIHVwIHRvIDVtaW4gdG8gZG93bmxvYWQgZGVwZW5kaW5nIG9uIHlvdXIgY29ubmVjdGlvbi4iLCAic2NtIjogImh0dHBzOi8vZ2l0aHViLmNvbS9hcGFjaGUvc3BhcmsuZ2l0IiwgInRhZ3MiOiBbImJpZ2RhdGEiLCAibWFwcmVkdWNlIiwgImJhdGNoIiwgImFuYWx5dGljcyJdLCAidmVyc2lvbiI6ICIxLjYuMCJ9",
+        "DCOS_PACKAGE_REGISTRY_VERSION": "1.0.0-rc1",
+        "DCOS_PACKAGE_FRAMEWORK_NAME": "spark",
+        "DCOS_PACKAGE_VERSION": "1.6.0",
+        "SPARK_URI": "http://downloads.mesosphere.io.s3.amazonaws.com/spark/assets/spark-1.6.0.tgz",
+        "DCOS_PACKAGE_NAME": "spark",
+        "DCOS_PACKAGE_IS_FRAMEWORK": "true"
+      },
+      "acceptedResourceRoles": null,
+      "version": "2016-01-29T18:44:01.428Z",
+      "versionInfo": {
+        "lastScalingAt": "2016-01-29T18:44:01.428Z",
+        "lastConfigChangeAt": "2016-01-29T18:44:01.428Z"
+      },
+      "tasksStaged": 0,
+      "tasksRunning": 1,
+      "tasksHealthy": 1,
+      "tasksUnhealthy": 0,
+      "deployments": []
+    },
+    {
+      "id": "/zeppelin",
+      "cmd": "sed \"s#<value>8080</value>#<value>$PORT0</value>#\" < conf/zeppelin-site.xml.template > conf/zeppelin-site.xml && sed -i \"s#<value>-1</value>#<value>$PORT1</value>#\" conf/zeppelin-site.xml && bin/zeppelin.sh start",
+      "args": null,
+      "user": null,
+      "env": {},
+      "instances": 1,
+      "cpus": 1,
+      "mem": 1024,
+      "disk": 0,
+      "executor": "",
+      "constraints": [],
+      "uris": [],
+      "storeUrls": [],
+      "ports": [
+        10004,
+        10005
+      ],
+      "requirePorts": false,
+      "backoffSeconds": 1,
+      "backoffFactor": 1.15,
+      "maxLaunchDelaySeconds": 3600,
+      "container": {
+        "type": "DOCKER",
+        "volumes": [],
+        "docker": {
+          "image": "mesosphere/zeppelin:5-16",
+          "network": "HOST",
+          "privileged": false,
+          "parameters": [],
+          "forcePullImage": false
+        }
+      },
+      "healthChecks": [
+        {
+          "protocol": "TCP",
+          "portIndex": 0,
+          "gracePeriodSeconds": 300,
+          "intervalSeconds": 60,
+          "timeoutSeconds": 15,
+          "maxConsecutiveFailures": 3,
+          "ignoreHttp1xx": false
+        }
+      ],
+      "dependencies": [],
+      "upgradeStrategy": {
+        "minimumHealthCapacity": 1,
+        "maximumOverCapacity": 1
+      },
+      "labels": {
+        "DCOS_PACKAGE_RELEASE": "0",
+        "DCOS_PACKAGE_SOURCE": "https://github.com/mesosphere/multiverse/archive/version-1.x.zip",
+        "DCOS_PACKAGE_METADATA": "eyJkZXNjcmlwdGlvbiI6ICJaZXBwZWxpbiBpcyBhIHdlYi1iYXNlZCBub3RlYm9vayB0aGF0IGVuYWJsZXMgaW50ZXJhY3RpdmUgZGF0YSBhbmFseXRpY3MiLCAiZnJhbWV3b3JrIjogdHJ1ZSwgImltYWdlcyI6IHsiaWNvbi1sYXJnZSI6ICJodHRwczovL2Rvd25sb2Fkcy5tZXNvc3BoZXJlLmNvbS96ZXBwZWxpbi9hc3NldHMvaWNvbi1zZXJ2aWNlLXplcHBlbGluLWxhcmdlLnBuZyIsICJpY29uLW1lZGl1bSI6ICJodHRwczovL2Rvd25sb2Fkcy5tZXNvc3BoZXJlLmNvbS96ZXBwZWxpbi9hc3NldHMvaWNvbi1zZXJ2aWNlLXplcHBlbGluLW1lZGl1bS5wbmciLCAiaWNvbi1zbWFsbCI6ICJodHRwczovL2Rvd25sb2Fkcy5tZXNvc3BoZXJlLmNvbS96ZXBwZWxpbi9hc3NldHMvaWNvbi1zZXJ2aWNlLXplcHBlbGluLXNtYWxsLnBuZyJ9LCAibWFpbnRhaW5lciI6ICJzdXBwb3J0QG1lc29zcGhlcmUuaW8iLCAibmFtZSI6ICJ6ZXBwZWxpbiIsICJwb3N0SW5zdGFsbE5vdGVzIjogIlplcHBlbGluIGhhcyBiZWVuIHN1Y2Nlc3NmdWxseSBpbnN0YWxsZWQhXG5Ob3RlIHRoYXQgdGhlIHNlcnZpY2UgaXMgZXhwZXJpbWVudGFsIGFuZCB0aGVyZSBtYXkgYmUgYnVncywgaW5jb21wbGV0ZSBmZWF0dXJlcywgaW5jb3JyZWN0IGRvY3VtZW50YXRpb24gb3Igb3RoZXIgZGlzY3JlcGFuY2llcy4iLCAic2NtIjogImh0dHBzOi8vZ2l0aHViLmNvbS9hcGFjaGUvaW5jdWJhdG9yLXplcHBlbGluIiwgInRhZ3MiOiBbIm5mbGFicyIsICJmcmFtZXdvcmsiLCAiYmlnZGF0YSIsICJzcGFyayIsICJub3RlYm9vayIsICJpbnRlcmFjdGl2ZSJdLCAidmVyc2lvbiI6ICIwLjAuMSJ9",
+        "DCOS_PACKAGE_REGISTRY_VERSION": "1.0.0-rc1",
+        "DCOS_PACKAGE_VERSION": "0.0.1",
+        "DCOS_PACKAGE_NAME": "zeppelin",
+        "DCOS_PACKAGE_IS_FRAMEWORK": "true"
+      },
+      "acceptedResourceRoles": null,
+      "version": "2016-02-01T13:42:44.085Z",
+      "versionInfo": {
+        "lastScalingAt": "2016-02-01T13:42:44.085Z",
+        "lastConfigChangeAt": "2016-02-01T13:42:44.085Z"
+      },
+      "tasksStaged": 0,
+      "tasksRunning": 1,
+      "tasksHealthy": 1,
+      "tasksUnhealthy": 0,
+      "deployments": []
+    },
+    {
+      "id": "/cassandra/sfp",
+      "cmd": "$(pwd)/jre*/bin/java $JAVA_OPTS -classpath cassandra-mesos-framework.jar io.mesosphere.mesos.frameworks.cassandra.framework.Main",
+      "args": null,
+      "user": null,
+      "env": {
+        "CASSANDRA_ZK_TIMEOUT_MS": "10000",
+        "JAVA_OPTS": "-Xms256m -Xmx256m",
+        "MESOS_AUTHENTICATE": "false",
+        "CASSANDRA_RESOURCE_CPU_CORES": "6.0",
+        "CASSANDRA_FAILOVER_TIMEOUT_SECONDS": "604800",
+        "CASSANDRA_BOOTSTRAP_GRACE_TIME_SECONDS": "120",
+        "CASSANDRA_DEFAULT_DC": "DC1",
+        "CASSANDRA_RESOURCE_MEM_MB": "51200",
+        "MESOS_ZK": "zk://master.mesos:2181/mesos",
+        "CASSANDRA_DATA_DIRECTORY": ".",
+        "CASSANDRA_FRAMEWORK_MESOS_ROLE": "*",
+        "CASSANDRA_CLUSTER_NAME": "sfp",
+        "CASSANDRA_RESOURCE_DISK_MB": "640000",
+        "CASSANDRA_SEED_COUNT": "2",
+        "CASSANDRA_ZK": "zk://master.mesos:2181/cassandra-mesos/sfp",
+        "CASSANDRA_NODE_COUNT": "5",
+        "CASSANDRA_DEFAULT_RACK": "RAC1",
+        "CASSANDRA_HEALTH_CHECK_INTERVAL_SECONDS": "60"
+      },
+      "instances": 1,
+      "cpus": 6,
+      "mem": 51200,
+      "disk": 0,
+      "executor": "",
+      "constraints": [],
+      "uris": [
+        "https://downloads.mesosphere.com/cassandra-mesos/artifacts/0.2.0-1/cassandra-mesos-0.2.0-1.tar.gz",
+        "https://downloads.mesosphere.com/java/jre-7u76-linux-x64.tar.gz"
+      ],
+      "storeUrls": [],
+      "ports": [
+        10001
+      ],
+      "requirePorts": false,
+      "backoffSeconds": 1,
+      "backoffFactor": 1.15,
+      "maxLaunchDelaySeconds": 3600,
+      "container": null,
+      "healthChecks": [
+        {
+          "path": "/health/cluster",
+          "protocol": "HTTP",
+          "portIndex": 0,
+          "gracePeriodSeconds": 120,
+          "intervalSeconds": 15,
+          "timeoutSeconds": 5,
+          "maxConsecutiveFailures": 0,
+          "ignoreHttp1xx": false
+        },
+        {
+          "path": "/health/process",
+          "protocol": "HTTP",
+          "portIndex": 0,
+          "gracePeriodSeconds": 120,
+          "intervalSeconds": 30,
+          "timeoutSeconds": 5,
+          "maxConsecutiveFailures": 3,
+          "ignoreHttp1xx": false
+        }
+      ],
+      "dependencies": [],
+      "upgradeStrategy": {
+        "minimumHealthCapacity": 1,
+        "maximumOverCapacity": 1
+      },
+      "labels": {
+        "DCOS_PACKAGE_RELEASE": "2",
+        "DCOS_PACKAGE_SOURCE": "https://github.com/mesosphere/universe/archive/version-1.x.zip",
+        "DCOS_PACKAGE_COMMAND": "eyJwaXAiOiBbImRjb3M9PTAuMS4xMyIsICJnaXQraHR0cHM6Ly9naXRodWIuY29tL21lc29zcGhlcmUvZGNvcy1jYXNzYW5kcmEuZ2l0I2Rjb3MtY2Fzc2FuZHJhPTAuMS4wIl19",
+        "DCOS_PACKAGE_METADATA": "eyJkZXNjcmlwdGlvbiI6ICJBcGFjaGUgQ2Fzc2FuZHJhIHJ1bm5pbmcgb24gQXBhY2hlIE1lc29zIiwgImZyYW1ld29yayI6IHRydWUsICJpbWFnZXMiOiB7Imljb24tbGFyZ2UiOiAiaHR0cHM6Ly9kb3dubG9hZHMubWVzb3NwaGVyZS5jb20vY2Fzc2FuZHJhLW1lc29zL2Fzc2V0cy9jYXNzYW5kcmEtbGFyZ2UucG5nIiwgImljb24tbWVkaXVtIjogImh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuY29tL2Nhc3NhbmRyYS1tZXNvcy9hc3NldHMvY2Fzc2FuZHJhLW1lZGl1bS5wbmciLCAiaWNvbi1zbWFsbCI6ICJodHRwczovL2Rvd25sb2Fkcy5tZXNvc3BoZXJlLmNvbS9jYXNzYW5kcmEtbWVzb3MvYXNzZXRzL2Nhc3NhbmRyYS1zbWFsbC5wbmcifSwgImxpY2Vuc2VzIjogW3sibmFtZSI6ICJBcGFjaGUgTGljZW5zZSBWZXJzaW9uIDIuMCIsICJ1cmwiOiAiaHR0cHM6Ly9naXRodWIuY29tL21lc29zcGhlcmUvY2Fzc2FuZHJhLW1lc29zL2Jsb2IvbWFzdGVyL0xJQ0VOU0UudHh0In1dLCAibWFpbnRhaW5lciI6ICJzdXBwb3J0QG1lc29zcGhlcmUuaW8iLCAibmFtZSI6ICJjYXNzYW5kcmEiLCAicG9zdEluc3RhbGxOb3RlcyI6ICJUaGFuayB5b3UgZm9yIGluc3RhbGxpbmcgdGhlIEFwYWNoZSBDYXNzYW5kcmEgRENPUyBTZXJ2aWNlLlxuXG5cdERvY3VtZW50YXRpb246IGh0dHA6Ly9tZXNvc3BoZXJlLmdpdGh1Yi5pby9jYXNzYW5kcmEtbWVzb3MvXG5cdElzc3VlczogaHR0cHM6Ly9naXRodWIuY29tL21lc29zcGhlcmUvY2Fzc2FuZHJhLW1lc29zL2lzc3VlcyIsICJwb3N0VW5pbnN0YWxsTm90ZXMiOiAiVGhlIEFwYWNoZSBDYXNzYW5kcmEgRENPUyBTZXJ2aWNlIGhhcyBiZWVuIHVuaW5zdGFsbGVkIGFuZCB3aWxsIG5vIGxvbmdlciBydW4uXG5QbGVhc2UgZm9sbG93IHRoZSBpbnN0cnVjdGlvbnMgYXQgaHR0cDovL2RvY3MubWVzb3NwaGVyZS5jb20vc2VydmljZXMvY2Fzc2FuZHJhLyN1bmluc3RhbGwgdG8gY2xlYW4gdXAgYW55IHBlcnNpc3RlZCBzdGF0ZSIsICJwcmVJbnN0YWxsTm90ZXMiOiAiVGhlIEFwYWNoZSBDYXNzYW5kcmEgRENPUyBTZXJ2aWNlIGltcGxlbWVudGF0aW9uIGlzIGFscGhhIGFuZCB0aGVyZSBtYXkgYmUgYnVncywgaW5jb21wbGV0ZSBmZWF0dXJlcywgaW5jb3JyZWN0IGRvY3VtZW50YXRpb24gb3Igb3RoZXIgZGlzY3JlcGFuY2llcy5cblRoZSBkZWZhdWx0IGNvbmZpZ3VyYXRpb24gcmVxdWlyZXMgMyBub2RlcyBlYWNoIHdpdGggMC4zIENQVSBzaGFyZXMsIDExODRNQiBvZiBtZW1vcnkgYW5kIDI3Mk1CIG9mIGRpc2suIiwgInNjbSI6ICJodHRwczovL2dpdGh1Yi5jb20vbWVzb3NwaGVyZS9jYXNzYW5kcmEtbWVzb3MuZ2l0IiwgInRhZ3MiOiBbImRhdGEiLCAiZGF0YWJhc2UiLCAibm9zcWwiXSwgInZlcnNpb24iOiAiMC4yLjAtMSJ9",
+        "DCOS_PACKAGE_REGISTRY_VERSION": "1.0.0-rc1",
+        "DCOS_PACKAGE_FRAMEWORK_NAME": "cassandra.sfp",
+        "DCOS_PACKAGE_VERSION": "0.2.0-1",
+        "DCOS_PACKAGE_NAME": "cassandra",
+        "DCOS_PACKAGE_IS_FRAMEWORK": "true"
+      },
+      "acceptedResourceRoles": null,
+      "version": "2016-01-29T18:43:48.386Z",
+      "versionInfo": {
+        "lastScalingAt": "2016-01-29T18:43:48.386Z",
+        "lastConfigChangeAt": "2016-01-29T18:43:48.386Z"
+      },
+      "tasksStaged": 0,
+      "tasksRunning": 1,
+      "tasksHealthy": 1,
+      "tasksUnhealthy": 0,
+      "deployments": []
+    }
+  ]
+}
